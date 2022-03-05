@@ -28,3 +28,4 @@ int main()
   output(num1,den1,num2,den2,num3,den3);
   return 0;
 }
+ 

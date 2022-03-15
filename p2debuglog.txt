@@ -1,1 +1,96 @@
+gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x8af: file p2final.c, line 57.
+(gdb) r
+Starting program: /home/runner/Test3Session2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
 
+Breakpoint 1, main () at p2final.c:57
+57    Fraction f1 = input_fraction();
+(gdb) s
+input_fraction () at p2final.c:23
+23  {
+(gdb) n
+25    printf("Enter One Fraction (NUM DEN):\n");
+(gdb) 
+Enter One Fraction (NUM DEN):
+26    scanf("%d%d", &f.num, &f.den);
+(gdb) 
+1 4
+27    return f;
+(gdb) print f
+$1 = {num = 1, den = 4}
+(gdb) n
+28  }
+(gdb) n
+main () at p2final.c:58
+58    Fraction f2 = input_fraction();
+(gdb) p r1
+No symbol "r1" in current context.
+(gdb) p f1
+$2 = {num = 1, den = 4}
+(gdb) n
+Enter One Fraction (NUM DEN):
+2 4
+59    Fraction f3 = input_fraction();
+(gdb) n
+Enter One Fraction (NUM DEN):
+3 4
+61    Fraction small = smallest_fraction(f1, f2, f3);
+(gdb) i lo
+f1 = {num = 1, den = 4}
+f2 = {num = 2, den = 4}
+f3 = {num = 3, den = 4}
+small = {num = 0, den = 0}
+(gdb) s
+smallest_fraction (f1=..., f2=..., f3=...) at p2final.c:32
+32   float a = (float)f1.num / f1.den; 
+(gdb) p a
+$3 = 5.60519386e-45
+(gdb) n
+33   float b = (float)f2.num / f2.den; 
+(gdb) p a
+$4 = 0.25
+(gdb) n
+34   float c = (float)f3.num / f3.den; 
+(gdb) n
+36    if (a < b && a < c)
+(gdb) i lo
+a = 0.25
+b = 0.5
+c = 0.75
+(gdb) n
+38      return f1;
+(gdb) n
+48  }
+(gdb) n
+main () at p2final.c:62
+62    output(f1, f2, f3, small);
+(gdb) s
+output (f1=..., f2=..., f3=..., smallest=...) at p2final.c:52
+52    printf("The smallest of %d/%d , %d/%d and %d/%d is %d/%d\n", f1.num, f1.den, f2.num, f2.den, f3.num, f3.den, smallest.num, smallest.den);
+(gdb) n
+The smallest of 1/4 , 2/4 and 3/4 is 1/4
+53  }
+(gdb) n
+main () at p2final.c:63
+63    return 0;
+(gdb) c
+Continuing.
+[Inferior 1 (process 290) exited normally]
+(gdb) 
